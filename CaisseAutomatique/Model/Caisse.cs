@@ -105,6 +105,11 @@ namespace CaisseAutomatique.Model
         /// Pattern d'observable
         /// </summary>
         public event PropertyChangedEventHandler? PropertyChanged;
+        
+        /// <summary>
+        /// Permet de notifier qu'une propriété a été changé
+        /// </summary>
+        /// <param name="propertyName">nom de la propriété</param>
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -113,7 +118,6 @@ namespace CaisseAutomatique.Model
         /// <summary>
         /// Ajoute une article dans la liste des articles
         /// </summary>
-        /// <param name="article">Article a ajouter</param>
         public void AddArticle()
         {
             this.articles.Add(this.dernierArticleScanne);

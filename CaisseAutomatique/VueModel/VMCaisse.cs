@@ -55,12 +55,13 @@ namespace CaisseAutomatique.VueModel
         {
             this.EstDisponible = true;
             this.metier = new Caisse();
+            automate = new Automate(metier);
             this.metier.PropertyChanged += Metier_PropertyChanged;
-            this.metier.PropertyChanged += Automate_PropertyChanged;
+            this.automate.PropertyChanged += Automate_PropertyChanged;
             this.articles = new ObservableCollection<Article>();
             this.AjouterLigneTotalEtResteAPayer();
 
-            automate = new Automate(metier);
+            
            
         }
 
