@@ -9,5 +9,7 @@ namespace CaisseAutomatique.Model.Automates
     public enum Evenement
     {
         SCAN_ARTICLE,
+        PAYER,
+        RESET
     }
 }

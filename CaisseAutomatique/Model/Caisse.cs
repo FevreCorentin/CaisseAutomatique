@@ -123,5 +123,23 @@ namespace CaisseAutomatique.Model
             this.articles.Add(this.dernierArticleScanne);
             this.NotifyPropertyChanged("Articles");
         }
+
+        /// <summary>
+        /// Clear la liste article
+        /// </summary>
+        public void ClearArticle()
+        {
+            this.articles.Clear();
+            this.NotifyPropertyChanged("Articles");
+        }
+
+        public void Reset()
+        {
+            this.articles = new List<Article>();
+            this.dernierArticleScanne = null;
+            this.poidsBalance = 0;
+            this.sommePayee = 0;
+            this.NotifyPropertyChanged("Reset");
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace CaisseAutomatique.Model.Etats
     public class EtatScanProduitEncour : Etat
     {
         public override string Message => "Scannez le produit suivant !";
-        public EtatScanProduitEncour(Caisse metier) : base(metier)
+        public EtatScanProduitEncour(Caisse metier, Automate automate) : base(metier, automate)
         {
 
         }
@@ -21,7 +21,9 @@ namespace CaisseAutomatique.Model.Etats
                 case Evenement.SCAN_ARTICLE:
                     this.Caise.AddArticle();
                     break;
-
+                case Evenement.PAYER:
+                    this.Caise.ClearArticle();
+                    break;
             }
         }
 
@@ -30,7 +32,9 @@ namespace CaisseAutomatique.Model.Etats
             Etat etat = this;
             switch (e)
             {
-                
+                case Evenement.PAYER:
+                    etat = new EtatFin(this.Caise, Automate);
+                    break;
             }
             return etat;
         }

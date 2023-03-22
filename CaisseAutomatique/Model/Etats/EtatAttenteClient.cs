@@ -9,7 +9,7 @@ namespace CaisseAutomatique.Model.Etats
 {
     public class EtatAttenteClient : Etat
     {
-        public EtatAttenteClient(Caisse metier) : base(metier)
+        public EtatAttenteClient(Caisse metier,Automate automate) : base(metier,automate)
         {
 
         }
@@ -32,7 +32,7 @@ namespace CaisseAutomatique.Model.Etats
             switch (e)
             {
                 case Evenement.SCAN_ARTICLE:
-                    etat = new EtatScanProduitEncour(this.Caise);
+                    etat = new EtatScanProduitEncour(this.Caise,Automate);
                     break;
             }
             return etat;

@@ -152,14 +152,15 @@ namespace CaisseAutomatique.VueModel
         /// <param name="nbArticle">Nombre d'articles</param>
         public void SaisirNombreArticle(int nbArticle)
         {
-            this.metier.SaisieQuantite(nbArticle);
+            this.metier.SaisieQuantite(nbArticle);        
         }
 
         /// <summary>
         /// L'utilisateur essaye de payer
         /// </summary>
         public void Paye()
-        {
+        {           
+            this.automate.Activer(Evenement.PAYER);
         }
 
         /// <summary>
