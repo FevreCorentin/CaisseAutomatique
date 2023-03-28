@@ -124,15 +124,6 @@ namespace CaisseAutomatique.Model
             this.NotifyPropertyChanged("Articles");
         }
 
-        /// <summary>
-        /// Clear la liste article
-        /// </summary>
-        public void ClearArticle()
-        {
-            this.articles.Clear();
-            this.NotifyPropertyChanged("Articles");
-        }
-
         public void Reset()
         {
             this.articles = new List<Article>();
@@ -140,6 +131,24 @@ namespace CaisseAutomatique.Model
             this.poidsBalance = 0;
             this.sommePayee = 0;
             this.NotifyPropertyChanged("Reset");
+        }
+        public void Deposer(Article article)
+        {
+            this.poidsBalance += article.Poids;
+        }
+        public void Retirer(Article article)
+        {
+            this.poidsBalance -= article.Poids;
+        }
+
+        public bool VerificationPoids()
+        {
+            bool boolean = false;
+            if (poidsBalance == PoidsAttendu)
+            {
+                boolean = true;
+            }
+            return boolean;
         }
     }
 }

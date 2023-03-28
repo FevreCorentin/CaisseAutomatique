@@ -10,6 +10,8 @@ namespace CaisseAutomatique.Model.Automates
     {
         SCAN_ARTICLE,
         PAYER,
-        RESET
+        RESET,
+        DEPOSER,
+        RETIRER
     }
 }

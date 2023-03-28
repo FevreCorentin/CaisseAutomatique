@@ -2,6 +2,7 @@
 using CaisseAutomatique.Model.Articles;
 using CaisseAutomatique.Model.Articles.Realisations;
 using CaisseAutomatique.Model.Automates;
+using CaisseAutomatique.Model.Etats;
 using CaisseAutomatique.Vue;
 using System;
 using System.Collections.ObjectModel;
@@ -59,9 +60,7 @@ namespace CaisseAutomatique.VueModel
             this.metier.PropertyChanged += Metier_PropertyChanged;
             this.automate.PropertyChanged += Automate_PropertyChanged;
             this.articles = new ObservableCollection<Article>();
-            this.AjouterLigneTotalEtResteAPayer();
-
-            
+            this.AjouterLigneTotalEtResteAPayer();           
            
         }
 
@@ -136,6 +135,8 @@ namespace CaisseAutomatique.VueModel
         /// <param name="vueArticle">Vue de l'article posé sur la balance</param>
         public void PoseUnArticleSurLaBalance(VueArticle vueArticle)
         {
+            this.metier.Deposer(vueArticle.Article);
+            this.automate.Activer(Evenement.DEPOSER);
         }
 
         /// <summary>
@@ -144,6 +145,8 @@ namespace CaisseAutomatique.VueModel
         /// <param name="vueArticle">Vue de l'article enlevé de la balance</param>
         public void EnleveUnArticleDeLaBalance(VueArticle vueArticle)
         {
+            this.metier.Retirer(vueArticle.Article);
+            this.automate.Activer(Evenement.RETIRER);
         }
 
         /// <summary>

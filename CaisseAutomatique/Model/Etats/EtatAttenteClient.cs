@@ -32,7 +32,10 @@ namespace CaisseAutomatique.Model.Etats
             switch (e)
             {
                 case Evenement.SCAN_ARTICLE:
-                    etat = new EtatScanProduitEncour(this.Caise,Automate);
+                    etat = new EtatAttenteDepoProduit(this.Caise,Automate);
+                    break;
+                case Evenement.DEPOSER:
+                    etat = new EtatProblemeBalance(this.Caise, Automate,this);
                     break;
             }
             return etat;

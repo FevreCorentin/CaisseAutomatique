@@ -22,7 +22,7 @@ namespace CaisseAutomatique.Model.Etats
                     this.Caise.AddArticle();
                     break;
                 case Evenement.PAYER:
-                    this.Caise.ClearArticle();
+                    this.Caise.Reset();
                     break;
             }
         }
@@ -34,6 +34,16 @@ namespace CaisseAutomatique.Model.Etats
             {
                 case Evenement.PAYER:
                     etat = new EtatFin(this.Caise, Automate);
+                    break;
+
+                case Evenement.SCAN_ARTICLE:
+                    etat = new EtatAttenteDepoProduit(this.Caise, Automate);
+                    break;
+                case Evenement.RETIRER:
+                    etat = new EtatProblemeBalance(this.Caise, Automate, this);
+                    break;
+                case Evenement.DEPOSER:
+                    etat = new EtatProblemeBalance(this.Caise, Automate, this);
                     break;
             }
             return etat;
