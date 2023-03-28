@@ -107,8 +107,9 @@ namespace CaisseAutomatique.VueModel
         /// Ouvrir l'écran de sélection des quantités pour un article dénombrable
         /// </summary>
         private void OuvrirEcranSelectionQuantite()
-        {
+        {    
             new EcranSelectionQuantite(this).Show();
+            this.automate.Activer(Evenement.SAISIEQUANTITE);
         }
 
         /// <summary>
@@ -203,6 +204,10 @@ namespace CaisseAutomatique.VueModel
             if (e.PropertyName == "Message")
             {
                 this.NotifyPropertyChanged("Message");
+            }
+            if (e.PropertyName == "ScanArticleDenombrable")
+            {
+                this.OuvrirEcranSelectionQuantite();
             }
         }
     }

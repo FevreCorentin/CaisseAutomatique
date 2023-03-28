@@ -22,17 +22,24 @@ namespace CaisseAutomatique.Model.Automates
         {
             this.caisse = metier;
             etatCourant = new EtatAttenteClient(metier,this);
+            this.etatCourant.PropertyChanged += EtatCourant_PropertyChanged;
         }
         public void Activer(Evenement e)
         {
             etatCourant.Action(e);
             this.etatCourant = etatCourant.Transition(e);
             NotifyPropertyChanged("Message");
+            this.etatCourant.PropertyChanged += EtatCourant_PropertyChanged;
         }
 
         private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void EtatCourant_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "ScanArticleDenombrable") NotifyPropertyChanged("ScanArticleDenombrable");
         }
     }
 }

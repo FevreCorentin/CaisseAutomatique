@@ -12,6 +12,7 @@ namespace CaisseAutomatique.Model.Automates
         PAYER,
         RESET,
         DEPOSER,
-        RETIRER
+        RETIRER,
+        SAISIEQUANTITE
     }
 }

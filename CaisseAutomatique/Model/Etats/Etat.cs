@@ -1,13 +1,15 @@
 ﻿using CaisseAutomatique.Model.Automates;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CaisseAutomatique.Model.Etats
 {
-    public abstract class Etat
+    public abstract class Etat : INotifyPropertyChanged
     {
         private Caisse caise;
         private Automate automate;
@@ -17,6 +19,12 @@ namespace CaisseAutomatique.Model.Etats
         protected Automate Automate { get => automate; set => automate = value; }
 
         private Etat message;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public Etat(Caisse metier, Automate automate)
         {

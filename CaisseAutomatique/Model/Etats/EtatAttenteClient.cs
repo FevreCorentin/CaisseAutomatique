@@ -21,7 +21,14 @@ namespace CaisseAutomatique.Model.Etats
            switch (e)
             {
                 case Evenement.SCAN_ARTICLE:
-                    this.Caise.AddArticle();
+                    if (this.Caise.DernierArticleScanne.IsDenombrable == true)
+                    {
+                        this.NotifyPropertyChanged("ScanArticleDenombrable");
+                    }
+                    else
+                    {
+                        this.Caise.AddArticle();
+                    }                
                     break;
             }
         }
@@ -32,11 +39,15 @@ namespace CaisseAutomatique.Model.Etats
             switch (e)
             {
                 case Evenement.SCAN_ARTICLE:
-                    etat = new EtatAttenteDepoProduit(this.Caise,Automate);
+                    etat = new EtatAttenteDepoProduit(this.Caise,Automate); 
                     break;
                 case Evenement.DEPOSER:
                     etat = new EtatProblemeBalance(this.Caise, Automate,this);
                     break;
+                case Evenement.SAISIEQUANTITE:
+                    etat = new EtatSaisieQuantite(this.Caise, Automate);
+                    break;
+
             }
             return etat;
         }

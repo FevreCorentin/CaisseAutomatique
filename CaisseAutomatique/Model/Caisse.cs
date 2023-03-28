@@ -118,9 +118,12 @@ namespace CaisseAutomatique.Model
         /// <summary>
         /// Ajoute une article dans la liste des articles
         /// </summary>
-        public void AddArticle()
+        public void AddArticle(int nombre = 1)
         {
-            this.articles.Add(this.dernierArticleScanne);
+            for (int i = 0; i < nombre; i++)
+            {
+                this.articles.Add(this.dernierArticleScanne);
+            }
             this.NotifyPropertyChanged("Articles");
         }
 
